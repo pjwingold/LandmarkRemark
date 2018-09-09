@@ -1,0 +1,5 @@
+apply from: 'utils.gradle'
+
+include ':app', ":common"
+
+project(':common').projectDir = new File(prop('repo.dir.common'))

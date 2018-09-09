@@ -1,0 +1,113 @@
+ext.applicationId = "au.com.pjwin.landmarkremark"
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    //todo extract sdk version to gradle.properties
+    compileSdkVersion 27
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testApplicationId project.applicationId + ".test"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        /*externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }*/
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "env"
+    productFlavors {
+        dev {
+            dimension "env"
+            resValue 'string', 'MAP_API_KEY', '"AIzaSyBSoY0EfUXURPdWacx3paiTaLMT-aIg-i8"'
+        }
+        prod {
+            dimension "env"
+            resValue 'string', 'MAP_API_KEY', '""'
+        }
+    }
+
+    productFlavors.all {
+        applicationId name.startsWith("dev") ? project.applicationId + '.' + name : project.applicationId
+    }
+
+    /*externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }*/
+
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+    }
+}
+
+dependencies {
+    //def room_version = '1.1.1'
+    //def lifecycle_version = "1.1.1"
+    def googlePlayServicesVersion = "15.0.1"
+    def supportLibraryVersion = prop("version.library.support")
+    //def retrofitVersion = "2.4.0"
+    //def okHttpVersion = "3.6.0"
+    def fireBaseVersion = "16.0.3"
+    def fireBaseDBVersion = prop("version.firebase.db")
+    def mockitoVersion = rootProject.properties.get("version.mockito")
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':common')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.android.support:support-v4:$supportLibraryVersion"
+    implementation "com.android.support:support-v13:$supportLibraryVersion"
+    //implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+    implementation "com.google.android.gms:play-services-maps:$googlePlayServicesVersion"
+    implementation "com.google.android.gms:play-services-location:$googlePlayServicesVersion"
+    implementation "com.google.android.gms:play-services-places:$googlePlayServicesVersion"
+    implementation "com.google.firebase:firebase-core:$fireBaseVersion"
+    implementation "com.google.firebase:firebase-auth:$fireBaseVersion"
+    implementation "com.google.firebase:firebase-database:$fireBaseDBVersion"
+    implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
+
+
+    //implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    //kapt "android.arch.lifecycle:compiler:$lifecycle_version"
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'com.android.support.test:runner:1.0.2'
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
+}
+
+apply plugin: 'com.google.gms.google-services'

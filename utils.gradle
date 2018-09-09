@@ -1,0 +1,7 @@
+Properties local = new Properties()
+local.load(new File(rootDir.absolutePath + "/local.properties").newDataInputStream())
+
+ext.prop = { name ->
+    def value = local.get(name)
+    return value != null ? value : properties.get(name)
+}

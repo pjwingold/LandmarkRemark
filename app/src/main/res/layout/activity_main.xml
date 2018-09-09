@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.constraint.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+        style="@style/MatchParentLayout"
+        tools:context=".ui.MainActivity">
+
+        <FrameLayout
+            android:id="@+id/map_container"
+            style="@style/MatchParentLayout">
+
+        </FrameLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
