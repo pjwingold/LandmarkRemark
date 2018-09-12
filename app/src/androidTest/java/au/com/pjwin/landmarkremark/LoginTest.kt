@@ -60,7 +60,7 @@ class LoginTest {
         latch = CountDownLatch(1)
         //DataSnapshot
         id?.let {
-            dbRef.setValue(Note(it, "mark 1", "", -33.852f, 151.211f))
+            dbRef.setValue(Note(it, "mark 1", "", "-33.852", "151.211"))
                     .addOnCompleteListener { task ->
                         latch.countDown()
                         //assertTrue(task.isSuccessful)

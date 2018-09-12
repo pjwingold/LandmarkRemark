@@ -17,21 +17,20 @@ open class AuthViewModel : DataViewModel<User>() {
         UserFirebaseRepository()
     }
 
-    //todo login with google auth
+    //todo login -> save user data using AccountManager
     fun login() {
-        //liveData
-        //userRepo.login()
+
     }
 
     fun loginAnonymous() {
-        val uId: String? = Pref.SHARED_PREF[PrefKey.USER_UID.name]
+        val uId: String? = Pref.SHARED_PREF[PrefKey.USER_UID]
 
         if (uId == null) {
             userRepo.loginAnonymous(
                     { user ->
                         //todo refactor so don't have to callback() every time
                         callback(this::onData, user)
-                        Pref[PrefKey.USER_UID.name] = user.uId
+                        Pref[PrefKey.USER_UID] = user.uId
                     },
                     { throwable -> callback(this::onError, throwable) }
             )

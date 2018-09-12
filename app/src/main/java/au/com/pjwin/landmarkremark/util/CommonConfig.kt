@@ -1,17 +1,23 @@
 package au.com.pjwin.landmarkremark.util
 
 import au.com.pjwin.commonlib.Common
+import au.com.pjwin.landmarkremark.BuildConfig
 
 class CommonConfig : Common.Config {
-    override fun readTimeout(): Long {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
-    override fun connectionTimeout(): Long {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun port() = BuildConfig.PORT
 
-    override fun debug(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun schema() = BuildConfig.SCHEMA
+
+    override fun host() = BuildConfig.HOST
+
+    override fun contextRoot() = BuildConfig.CONTEXT_ROOT
+
+    override fun readTimeout() = BuildConfig.READ_TIMEOUT
+
+    override fun connectionTimeout() = BuildConfig.CONNECTION_TIMEOUT
+
+    override fun debug() = BuildConfig.DEBUG
+
+    override fun credentialBase64() = BuildConfig.KUMULOS_REST_KEY
 }

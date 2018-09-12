@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.constraint.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <android.support.constraint.ConstraintLayout
         style="@style/MatchParentLayout"
         tools:context=".ui.MainActivity">
 
+        <EditText
+            android:id="@+id/search_input"
+            style="@style/Control.EditText"
+            android:layout_marginEnd="@dimen/content_spacing"
+            android:layout_marginStart="@dimen/content_spacing"
+            android:elevation="2dp"
+            android:hint="@string/search_input"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="@id/map_container"
+            app:layout_constraintStart_toStartOf="@id/map_container"
+            app:layout_constraintTop_toTopOf="@id/map_container" />
+
         <FrameLayout
             android:id="@+id/map_container"
-            style="@style/MatchParentLayout">
-
-        </FrameLayout>
+            style="@style/MatchParentLayout"
+            tools:background="@color/colorAccent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
