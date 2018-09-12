@@ -219,31 +219,4 @@ class MainActivity : BaseActivity<NoteResponse, NoteViewModel, ActivityMainBindi
 
         viewModel.getNotesByUser()
     }
-
-    private fun addMarkers() {
-        val markList = mutableListOf(
-                Note("1", "note 1 user 1", "1", "-33.852", "151.211"),
-                Note("2", "note 2 user 2", "2", "-33.863", "151.222"),
-                Note("3", "note 3 user 2", "2", "-33.873", "151.232"),
-                Note("4", "note 4 user 1", "1", "-33.880", "151.240"))
-
-        var colourHue = 0f
-        markList.forEach {
-            val latLng = LatLng(it.lat.toDouble(), it.lng.toDouble())
-            val marker = googleMap?.addMarker(MarkerOptions().position(latLng)
-                    .title(it.description)
-                    .icon(BitmapDescriptorFactory.defaultMarker(colourHue))
-            )
-            marker?.tag = it.id
-            colourHue += 10
-        }
-
-        googleMap?.setOnMarkerClickListener { it ->
-            if (BuildConfig.DEBUG) {
-                Toast.makeText(Util.context(), "the id is " + it.tag, Toast.LENGTH_SHORT).show()
-            }
-            initSaveDialog(it.position)
-            false
-        }
-    }
 }
