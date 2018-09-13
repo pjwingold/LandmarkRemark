@@ -50,6 +50,8 @@ class MainActivity : BaseActivity<NoteResponse, NoteViewModel, ActivityMainBindi
 
     override fun layoutId() = R.layout.activity_main
 
+    //todo change edit text to AutoCompleteText, add search by user/note
+    //todo onClick drop down result, camera move to point
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupMapViewMode()
