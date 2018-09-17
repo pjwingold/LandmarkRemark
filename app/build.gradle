@@ -1,4 +1,6 @@
 ext.applicationId = "au.com.pjwin.landmarkremark"
+ext.versionName = '1.0'
+ext.versionCode = 1
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -6,13 +8,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    //todo extract sdk version to gradle.properties
-    compileSdkVersion 27
+    buildToolsVersion rootProject.properties.get("version.build.tools")
+    compileSdkVersion rootProject.properties.get("version.sdk.max").toInteger()
+
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion prop("version.sdk.min").toInteger()
+        targetSdkVersion prop("version.sdk.max").toInteger()
+        versionName project.versionName
+        versionCode project.versionCode
 
         testApplicationId project.applicationId + ".test"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,10 +24,10 @@ android {
                 cppFlags ""
             }
         }*/
-        buildConfigField 'String', 'SCHEMA', '"https"'
-        buildConfigField 'String', 'HOST', '"api.flickr.com"'
+        buildConfigField 'String', 'SCHEMA', '""'
+        buildConfigField 'String', 'HOST', '""'
         buildConfigField 'int', 'PORT', '443'
-        buildConfigField 'String', 'CONTEXT_ROOT', '"services"'
+        buildConfigField 'String', 'CONTEXT_ROOT', '""'
         buildConfigField 'long', 'CONNECTION_TIMEOUT', '30'
         buildConfigField 'long', 'READ_TIMEOUT', '70'
 
@@ -57,10 +60,10 @@ android {
     productFlavors {
         dev {
             dimension "env"
-            resValue 'string', 'MAP_API_KEY', '""'
-            buildConfigField 'String', 'KUMULOS_API_KEY', '""'
-            buildConfigField 'String', 'KUMULOS_SECRET_KEY', '""'
-            buildConfigField 'String', 'KUMULOS_REST_KEY', '""'
+            resValue 'string', 'MAP_API_KEY', '"AIzaSyBSoY0EfUXURPdWacx3paiTaLMT-aIg-i8"'
+            buildConfigField 'String', 'KUMULOS_API_KEY', '"62eb2e45-81ba-4f99-af63-82260bfdbb1b"'
+            buildConfigField 'String', 'KUMULOS_SECRET_KEY', '"fjTJbUb6uxRAxi965veOv1RBeE4iD8bEcxzC"'
+            buildConfigField 'String', 'KUMULOS_REST_KEY', '"5f412b6ccf661bdda2f563c403f9b99e2a12dd027828d1e3395bb2204394147c"'
         }
         prod {
             dimension "env"
@@ -101,7 +104,6 @@ dependencies {
     def googlePlayServicesVersion = "15.0.1"
     //def supportLibraryVersion = prop("version.library.support")
     def fireBaseVersion = "16.0.3"
-    def fireBaseDBVersion = prop("version.firebase.db")
     def mockitoVersion = prop("version.mockito")
     def robolectricVersion = prop("version.robolectric")
     def kumulosVersion = "4.1.0"
@@ -121,7 +123,6 @@ dependencies {
 
     implementation "com.google.firebase:firebase-core:$fireBaseVersion"
     implementation "com.google.firebase:firebase-auth:$fireBaseVersion"
-    implementation "com.google.firebase:firebase-database:$fireBaseDBVersion"
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
 
     debugImplementation "com.kumulos.android:kumulos-android-debug:$kumulosVersion"
