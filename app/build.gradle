@@ -8,8 +8,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    buildToolsVersion rootProject.properties.get("version.build.tools")
-    compileSdkVersion rootProject.properties.get("version.sdk.max").toInteger()
+    buildToolsVersion prop("version.build.tools")
+    compileSdkVersion prop("version.sdk.max").toInteger()
 
     defaultConfig {
         minSdkVersion prop("version.sdk.min").toInteger()
@@ -102,7 +102,6 @@ android {
 
 dependencies {
     def googlePlayServicesVersion = "15.0.1"
-    //def supportLibraryVersion = prop("version.library.support")
     def fireBaseVersion = "16.0.3"
     def mockitoVersion = prop("version.mockito")
     def robolectricVersion = prop("version.robolectric")
@@ -112,9 +111,6 @@ dependencies {
     implementation project(':common')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    /*implementation "com.android.support:support-v4:$supportLibraryVersion"
-    implementation "com.android.support:support-v13:$supportLibraryVersion"*/
-    //implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
     implementation "com.google.android.gms:play-services-maps:$googlePlayServicesVersion"
@@ -127,9 +123,6 @@ dependencies {
 
     debugImplementation "com.kumulos.android:kumulos-android-debug:$kumulosVersion"
     releaseImplementation "com.kumulos.android:kumulos-android-release:$kumulosVersion"
-
-    //implementation "android.arch.lifecycle:extensions:$lifecycle_version"
-    //kapt "android.arch.lifecycle:compiler:$lifecycle_version"
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.android.support.test:runner:1.0.2'
